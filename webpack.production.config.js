@@ -14,7 +14,17 @@ module.exports = {
         path: path.resolve(__dirname, './dist' ),
         publicPath: ''
     },
-    mode: 'production', // it can be set to development, production, and none mode. the production mode will display more debuggable error in-contrast to production mode 
+    mode: 'production',
+    devServer: {
+        port: 9000, // don't know why the server is not runnig on port 9000 and instead  it's running on port 8080
+        static: {
+            directory: path.resolve(__dirname, './dist')
+        }, 
+        devMiddleware: {
+            index: 'index.html',
+            writeToDisk: true
+        }
+    }, // it can be set to development, production, and none mode. the production mode will display more debuggable error in-contrast to production mode 
     module: {
         rules: [
             {

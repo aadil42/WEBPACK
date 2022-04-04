@@ -9,7 +9,6 @@ heading.render();
 
 const hello_btn = new HelloBtn();
 hello_btn.render();
-
 if(!process) {
     console.log('this is none mode');
 } else if(process.env.NODE_ENV === 'development') {
