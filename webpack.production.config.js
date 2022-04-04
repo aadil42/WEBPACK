@@ -2,7 +2,6 @@
 // we can't use import and export in this file. this path is probably 
 // comming from node_modules.
 const path = require('path');
-const terserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 // get clean plugin
@@ -58,17 +57,16 @@ module.exports = {
                     }
                 }
             }
-            // ,
-            // {
-            //     test: /\.hbs/,
-            //     use: [
-            //         'handlebars-loader'
-            //     ]
-            // }
+            ,
+            { 
+                test: /\.hbs/,
+                use: [
+                    'handlebars-loader'
+                ]
+            }
         ]
     },
     plugins: [
-        new terserPlugin(), // the terserPlugin minifies the size of bundle.js in your dist directory.
         new MiniCssExtractPlugin({ // minicssextract  plugin makes separet css file and put it into a specified file in dist directory.
             filename: 'style.[contenthash].css'
         }),
