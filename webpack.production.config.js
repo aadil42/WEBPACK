@@ -8,9 +8,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js', 
+    entry: {
+        'hello-world': './src/hello-world.js',
+        'banana': './src/banana.js'
+    }, 
     output: {
-        filename: 'bundle.[contenthash].js', // this [contenthas] will generate new file if you change something in a file so the can have diffrent name, and if it has a diffrent name then browser will load the newer version. otherwise it will keep loading it from cache wich is the file with changes. same goes for css file 
+        filename: '[name].[contenthash].js', // the [name] will be taken from enetry point key.   // this [contenthas] will generate new file if you change something in a file so the can have diffrent name, and if it has a diffrent name then browser will load the newer version. otherwise it will keep loading it from cache wich is the file with changes. same goes for css file 
         path: path.resolve(__dirname, './dist' ),
         publicPath: ''
     },
@@ -78,13 +81,14 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({ // minicssextract  plugin makes separet css file and put it into a specified file in dist directory.
-            filename: 'style.[contenthash].css'
+            filename: '[name].[contenthash].css'
         }),
         new CleanWebpackPlugin(), // cleanwebpackplugin is a plugin that cleans the dist directory before building the bundle. Don't understand? remove this plugin and make some changes in js file and run webpack you'll know.
         new HtmlWebPackPlugin({   // it generates index.html file for you and put the approrpriate css and js in it. for some reason it is putting script tag in header instead of in the bottom of the body. I don't wheather it's working or not here.
             title: 'bye world', 
             template: 'src/index.hbs',
             description: 'some description',
+            minify: false,
             meta: {
                 inject: 'body'
             }
