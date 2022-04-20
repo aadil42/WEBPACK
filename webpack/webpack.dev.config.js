@@ -7,9 +7,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js', 
+    entry: {
+        'hello-world': './src/hello-world.js',
+        'banana': './src/banana.js'
+    }, 
     output: {
-        filename: 'bundle.js', // this [contenthas] will generate new file if you change something in a file so the can have diffrent name, and if it has a diffrent name then browser will load the newer version. otherwise it will keep loading it from cache wich is the file with changes. same goes for css file 
+        filename: '[name].bundle.js', // this [contenthas] will generate new file if you change something in a file so the can have diffrent name, and if it has a diffrent name then browser will load the newer version. otherwise it will keep loading it from cache wich is the file with changes. same goes for css file 
         path: path.resolve(__dirname, './dist' ),
         publicPath: ''
     },
@@ -68,12 +71,18 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(), // cleanwebpackplugin is a plugin that cleans the dist directory before building the bundle. Don't understand? remove this plugin and make some changes in js file and run webpack you'll know.
         new HtmlWebPackPlugin({   // it generates index.html file for you and put the approrpriate css and js in it. for some reason it is putting script tag in header instead of in the bottom of the body. I don't wheather it's working or not here.
+            filename: 'hello-world.html',
+            chunks: ['hello-world'], 
             title: 'bye world', 
-            template: 'src/index.hbs',
-            description: 'some description',
-            meta: {
-                inject: 'body'
-            }
+            template: 'src/page-template.hbs',
+            description: 'some description'
+        }),
+        new HtmlWebPackPlugin({   // it generates index.html file for you and put the approrpriate css and js in it. for some reason it is putting script tag in header instead of in the bottom of the body. I don't wheather it's working or not here.
+            filename: 'banana.html',
+            chunks: ['banana'], 
+            title: 'banana world', 
+            template: 'src/page-template.hbs',
+            description: 'some banana description'
         })
     ]
 }

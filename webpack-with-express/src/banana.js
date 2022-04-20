@@ -8,9 +8,10 @@
 
 import Heading from './components/heading/heading';
 import bananaImg from './components/banana-image/banana-image';
+import React from 'react';
 
 const heading = new Heading();
 const banana = new bananaImg();
 
 heading.render();
-banana.render();
+banana.render('This is banana page argument');

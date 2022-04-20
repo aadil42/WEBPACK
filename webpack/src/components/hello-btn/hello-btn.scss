@@ -1,0 +1,19 @@
+$mycolor: green;
+
+.hello-btn {
+    display: inline-block;
+    font-size: 20px;
+    padding: 20px;
+    background-color: $mycolor;
+    color: white;
+    outline: none;
+}
+
+.hello-btn:hover {
+    cursor: pointer;
+}
+.hello-world-text {
+    color: $mycolor;
+    font-weight: bold;
+    font-size: 20px;
+}
